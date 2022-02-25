@@ -31,3 +31,25 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# dependencies
+/blog-front/node_modules
+/blog-front/.pnp
+/blog-front/pnp.js
+
+# testing
+/blog-front/coverage
+
+# production
+/blog-front/build
+
+# misc
+/blog-front/.DS_Store
+/blog-front/.env.local
+/blog-front/.env.development.local
+/blog-front/.env.test.local
+/blog-front/.env.production.local
+
+/blog-front/npm-debug.log*
+/blog-front/yarn-debug.log*
+/blog-front/yarn-error.log*
