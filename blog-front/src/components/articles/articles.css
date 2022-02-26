@@ -1,10 +1,11 @@
-.articles__container{
+.articles{
     margin-top: 7.2rem;
 }
 
 .articles_item{
     margin: 0 auto 2.6rem;
-    width: 43.25rem;
+    width: 38vw;
+    max-width: 38vw;
     color: white;
     border: 7px solid;
     border-color: #EC3F3F;

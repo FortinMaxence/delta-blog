@@ -1,4 +1,61 @@
 .controller{
     position: absolute;
     color: white;
+    margin-top: 1.8rem;
+    margin-left: 1rem;
+}
+
+.controller__category_title{
+    margin: 0 0 0.2rem 0;
+}
+
+.controller__select_category{
+    padding: 1rem;
+    width: 25vw;
+    max-width: 15rem;
+    border: 5px solid #EC3F3F;
+    border-radius: 15px;
+    background-color: #0A0A0D;
+    color: white;
+    margin-bottom: 1rem;
+}
+
+h3 {
+    font-size: 16px;
+}
+
+.controller__addArticle{
+    display: flex;
+}
+
+.controller__addCategory{
+    display: flex;
+}
+
+.controller__addArticle_button{
+    margin: auto 1rem;
+    width: 2rem;
+    height: 2rem;
+    border: 3px solid #EC3F3F;
+    border-radius: 50%;
+    background-color: #0A0A0D;
+    color: white;
+    font-size: 24px;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.controller__addCategory_button{
+    margin: auto 1rem;
+    width: 2rem;
+    height: 2rem;
+    border: 3px solid #EC3F3F;
+    border-radius: 50%;
+    background-color: #0A0A0D;
+    color: white;
+    font-size: 24px;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
 }

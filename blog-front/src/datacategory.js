@@ -1,3 +1,6 @@
 export default [
-    "sport", "geoplotique", "armée"
+    {name: "Tous"},
+    {name: "Sport"},
+    {name: "Géopolitique"},
+    {name: "Armée"}
 ]

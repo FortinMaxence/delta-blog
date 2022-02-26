@@ -51,11 +51,11 @@ function App() {
     <div className="App">
       
       <Header />
+      <Controller
+            data={allCategories}
+      />
 
       <main>
-        <Controller
-            data={allCategories}
-        />
         <Articles 
             data={allArticles}
             //seeProduct={seeArticle}
