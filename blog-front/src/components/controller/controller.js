@@ -21,7 +21,7 @@ export default function Controller(props) {
                 </select>
                 <div className='controller__addArticle'>
                     <h3>AJOUTER UN ARTICLE</h3>
-                    <button className="controller__addArticle_button">+</button>      
+                    <button className="controller__addArticle_button" onClick={event => props.displayAddArticle()}>+</button>      
                 </div>
                 
                 <div className='controller__addCategory'>

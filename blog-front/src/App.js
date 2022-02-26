@@ -3,10 +3,12 @@ import Swal from 'sweetalert2';
 
 import Articles from './components/articles/articles';
 import Controller from './components/controller/controller'
+import AddArticle from './components/addArticle/addArticle'
 
 import './App.css';
 import './components/articles/articles.css'
 import './components/controller/controller.css'
+import './components/addArticle/addArticle.css'
 import Header from './components/Header';
 
 import dataTest from './data'
@@ -15,9 +17,17 @@ import dataCategory from './datacategory'
 function App() {
 
   const [allArticles, setAllArticles] = useState([]);
+  const [addArticleDisplay, setDisplayAddArticle] = useState(false);
   const [selectedCategory, setCategory] = useState("Tous");
-  const [posting, setPosting] = useState(false);
-  const [inputInvalid, setInputInvalid] = useState(false);
+  const [addArticle, setAddArticle] = useState({
+        id: 0,
+        title: "",
+        author: "",
+        creationDate: "",
+        creationHour: "",
+        content: "",
+        category: "",
+  });
 
   // check if url uses a secured protocol
   const sampleUrl = "https://via.placeholder.com/200/e9fff4";
@@ -27,16 +37,16 @@ function App() {
     return ["https:", "http:"].includes(parsed.protocol);
   }
 
-  // initialize invalidInput state to false to handle error messages
-  function initInvalidInput() {
-    setInputInvalid(false);
-  }
-
   let allCategories = dataCategory;
 
   //Update the selected category
   function updateCategory(new_category){
     setCategory(new_category);
+  }
+
+  //Display the add articles window
+  function displayAddArticle(){
+      setDisplayAddArticle(!addArticleDisplay);
   }
 
   //Update list of articles displayed when category is changed
@@ -60,18 +70,27 @@ function App() {
     <div className="App">
       
       <Header />
+      <AddArticle
+            categories={allCategories}
+            addArticle={addArticle}
+            addArticleDisplay={addArticleDisplay}
+            displayAddArticle={displayAddArticle}
+      />
+      
       <Controller
             data={allCategories}
             updateCategory={updateCategory}
+            displayAddArticle={displayAddArticle}
       />
-
       <main>
+        
+
         <Articles 
             data={allArticles}
             //seeProduct={seeArticle}
             validateUrl={validateUrl}
             url={sampleUrl}
-          />
+        />
       </main>
     </div>
   );
