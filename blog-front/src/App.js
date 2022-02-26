@@ -4,11 +4,13 @@ import Swal from 'sweetalert2';
 import Articles from './components/articles/articles';
 import Controller from './components/controller/controller'
 import AddArticle from './components/addArticle/addArticle'
+import AddCategory from './components/addCategory/addCategory'
 
 import './App.css';
 import './components/articles/articles.css'
 import './components/controller/controller.css'
 import './components/addArticle/addArticle.css'
+import './components/addCategory/addCategory.css'
 import Header from './components/Header';
 
 import dataTest from './data'
@@ -18,6 +20,7 @@ function App() {
 
   const [allArticles, setAllArticles] = useState([]);
   const [addArticleDisplay, setDisplayAddArticle] = useState(false);
+  const [addCategoryDisplay, setDisplayAddCategory] = useState(false);
   const [selectedCategory, setCategory] = useState("Tous");
   const [addArticle, setAddArticle] = useState({
         id: 0,
@@ -44,10 +47,16 @@ function App() {
     setCategory(new_category);
   }
 
-  //Display the add articles window
+  //Display the add article window
   function displayAddArticle(){
       setDisplayAddArticle(!addArticleDisplay);
   }
+
+  //Display the add category window
+  function displayAddCategory(){
+    console.log(addCategoryDisplay);
+    setDisplayAddCategory(!addCategoryDisplay);
+}
 
   //Update list of articles displayed when category is changed
   useEffect(() =>{
@@ -76,11 +85,16 @@ function App() {
             addArticleDisplay={addArticleDisplay}
             displayAddArticle={displayAddArticle}
       />
+      <AddCategory
+            addCategoryDisplay={addCategoryDisplay}
+            displayAddCategory={displayAddCategory}
+      />
       
       <Controller
             data={allCategories}
             updateCategory={updateCategory}
             displayAddArticle={displayAddArticle}
+            displayAddCategory={displayAddCategory}
       />
       <main>
         

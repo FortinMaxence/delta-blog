@@ -1,0 +1,81 @@
+.addCategory{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backdrop-filter: blur(0.5rem);
+    z-index: 1;
+    color: white;
+}
+
+.addCategory_container{
+    position: relative;
+    width: 37rem;
+    height: fit-content;
+    margin: 7.2rem auto;
+    border: 7px solid #EC3F3F;
+    border-radius: 20px;
+    background-color: #0A0A0D;
+}
+
+.addCategory_container_text{
+    margin: auto auto;
+    width: fit-content;
+    z-index: 3;
+}
+
+.addCategory_title{
+    width: fit-content;
+    margin: 1rem 0;
+    font-size: 40px;
+}
+
+.addCategory_input_container{
+    margin: 0 0 1rem;
+}
+
+label{
+    font-weight: bold;
+    font-size: 20px;
+    margin-right: 1rem;
+}
+
+input{
+    color: white;
+}
+
+.addCategory__input{
+    padding: 0.5rem 1rem;
+    border: 3px solid #EC3F3F;
+    border-radius: 6px;
+    background-color: #0A0A0D;
+    width: 93%;
+}
+
+.addCategory_buttons{
+    margin: 2rem 0;
+    display: flex;
+    justify-content: space-around;
+    
+}
+
+.addCategory_add{
+    background-color: #EC3F3F;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    width: 13rem;
+    height: 4rem;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.addCategory_back{
+    background-color: #0A0A0D;
+    color: white;
+    border: 3px solid #EC3F3F;
+    border-radius: 20px;
+    width: 13rem;
+    height: 4rem;
+    cursor: pointer;
+    font-weight: bold;
+}

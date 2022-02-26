@@ -26,7 +26,7 @@ export default function Controller(props) {
                 
                 <div className='controller__addCategory'>
                     <h3>AJOUTER UNE CATÉGORIE</h3>
-                    <button className="controller__addCategory_button">+</button> 
+                    <button className="controller__addCategory_button" onClick={event => props.displayAddCategory()}>+</button> 
                 </div>
                 
             </div>
