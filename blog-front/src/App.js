@@ -14,20 +14,10 @@ import dataCategory from './datacategory'
 
 function App() {
 
-  //const [allArticles, setAllProducts] = useState([]);
+  const [allArticles, setAllArticles] = useState([]);
+  const [selectedCategory, setCategory] = useState("Tous");
   const [posting, setPosting] = useState(false);
   const [inputInvalid, setInputInvalid] = useState(false);
-
-  // fetch articles and categories data from API
-  /*useEffect(() => {
-    fetch('http://localhost:9000/api/private/article')
-    .then(res => res.json())
-    .then(data => {
-      setAllProducts(data);
-    })
-    .catch(e => console.log(e.toString()));
-    
-  });*/
 
   // check if url uses a secured protocol
   const sampleUrl = "https://via.placeholder.com/200/e9fff4";
@@ -41,11 +31,30 @@ function App() {
   function initInvalidInput() {
     setInputInvalid(false);
   }
+
+  let allCategories = dataCategory;
+
+  //Update the selected category
+  function updateCategory(new_category){
+    setCategory(new_category);
+  }
+
+  //Update list of articles displayed when category is changed
+  useEffect(() =>{
+    let articles = loadArticles();
+    setAllArticles(articles);
+  }, [selectedCategory]);
+
+  // Load articles according to the category filter 
+  function loadArticles(){
+    let articles = [];
+    for (let i = 0; i < dataTest.length; i++){
+        if(dataTest[i].category == selectedCategory || selectedCategory == "Tous")
+          articles.push(dataTest[i]);
+    }
+    return articles;
+  }
   
-  const allArticles = dataTest;
-  console.log(allArticles);
-  const allCategories = dataCategory;
-  console.log(allCategories);
   
   return (
     <div className="App">
@@ -53,6 +62,7 @@ function App() {
       <Header />
       <Controller
             data={allCategories}
+            updateCategory={updateCategory}
       />
 
       <main>
