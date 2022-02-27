@@ -53,4 +53,43 @@
     font-size: 18px;
     font-weight: bold;
     cursor: pointer;
+    
+}
+
+.articles__deleteButton{
+    margin: 1rem;
+    padding: 0.5rem;
+    float: right;
+    background-color: #EC3F3F;
+    width: fit-content;
+    height: auto;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+.articles__updateButton{
+    margin: 1rem 0 0 0;
+    padding: 0.5rem;
+    float: right;
+    background-color: #0c72e7;
+    width: fit-content;
+    height: auto;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+button{
+    transform: translateY(0px);
+    transition: 1s;
+}
+
+button:hover{
+    transform: scale(1.1);
+    transition: 0.3s;
 }
