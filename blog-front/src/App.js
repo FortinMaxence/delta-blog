@@ -2,12 +2,14 @@ import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 
 import Articles from './components/articles/articles';
+import Article from './components/article/article';
 import Controller from './components/controller/controller'
 import AddArticle from './components/addArticle/addArticle'
 import AddCategory from './components/addCategory/addCategory'
 
 import './App.css';
 import './components/articles/articles.css'
+import './components/article/article.css'
 import './components/controller/controller.css'
 import './components/addArticle/addArticle.css'
 import './components/addCategory/addCategory.css'
@@ -19,6 +21,16 @@ import dataCategory from './datacategory'
 function App() {
 
   const [allArticles, setAllArticles] = useState([]);
+  const [selectedArticle, setArticle] = useState({
+    id: 0,
+        title: "",
+        author: "",
+        creationDate: "",
+        creationHour: "",
+        content: "",
+        category: "",
+  });
+  const [articleDisplay, setDisplayArticle] = useState(false);
   const [addArticleDisplay, setDisplayAddArticle] = useState(false);
   const [addCategoryDisplay, setDisplayAddCategory] = useState(false);
   const [selectedCategory, setCategory] = useState("Tous");
@@ -45,6 +57,13 @@ function App() {
   //Update the selected category
   function updateCategory(new_category){
     setCategory(new_category);
+  }
+
+  //Update the selected category
+  function seeArticle(article){
+      setArticle(article);
+      setDisplayArticle(!articleDisplay);
+      console.log(articleDisplay);
   }
 
   //Display the add article window
@@ -89,6 +108,12 @@ function App() {
             addCategoryDisplay={addCategoryDisplay}
             displayAddCategory={displayAddCategory}
       />
+
+      <Article
+          data={selectedArticle}
+          articleDisplay={articleDisplay}
+          seeArticle={seeArticle}
+      />
       
       <Controller
             data={allCategories}
@@ -97,13 +122,9 @@ function App() {
             displayAddCategory={displayAddCategory}
       />
       <main>
-        
-
         <Articles 
             data={allArticles}
-            //seeProduct={seeArticle}
-            validateUrl={validateUrl}
-            url={sampleUrl}
+            seeArticle={seeArticle}
         />
       </main>
     </div>
