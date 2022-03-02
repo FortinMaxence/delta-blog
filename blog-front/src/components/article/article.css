@@ -67,3 +67,8 @@
     cursor: pointer;
     font-weight: bold;
 }
+
+.article_back:hover{
+    background-color: #EC3F3F;
+    transition-duration: .5s;
+}

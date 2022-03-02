@@ -27,4 +27,8 @@ public class CategoryService {
 			throw new NotFoundException();
 		}
 	}
+	
+	public Category upsert(Category Category) {
+		return categoryRepository.save(Category);
+	}
 }

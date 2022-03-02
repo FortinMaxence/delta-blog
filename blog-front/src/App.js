@@ -17,12 +17,10 @@ import './components/addCategory/addCategory.css'
 import './components/updateArticle/updateArticle.css'
 import Header from './components/Header';
 
-import dataTest from './data'
-import dataCategory from './datacategory'
-
 function App() {
 
   const [allArticles, setAllArticles] = useState([]);
+  const [allCategories, setAllCategories] = useState(["Tous"]);
   
   const [selectedArticle, setArticle] = useState({
     id: 0,
@@ -48,19 +46,23 @@ function App() {
         content: "",
         category: "",
   });
+  const [updateArticle, setUpdateArticle] = useState({
+    id: 0,
+    title: "",
+    author: "",
+    creationDate: "",
+    creationHour: "",
+    content: "",
+    category: "",
+});
+  const [addCategory, setAddCategory] = useState({
+    id: 0,
+    name: ""
+});
 
+  const [posting, setPosting] = useState(false);
   const [toDelete, setToDelete] = useState({deleting: false});
-  const [toUpdate, setToUpdate] = useState();
-
-  // check if url uses a secured protocol
-  const sampleUrl = "https://via.placeholder.com/200/e9fff4";
-
-  function validateUrl(url) {
-    const parsed = new URL(url);
-    return ["https:", "http:"].includes(parsed.protocol);
-  }
-
-  let allCategories = dataCategory;
+  const [update, setUpdate] = useState(false);
 
   //Update the selected category
   function updateCategory(new_category){
@@ -92,19 +94,150 @@ function App() {
 
   //Update list of articles displayed when category is changed
   useEffect(() =>{
-    let articles = loadArticles();
-    setAllArticles(articles);
-  }, [selectedCategory]);
-
-  // Load articles according to the category filter 
-  function loadArticles(){
-    let articles = [];
-    for (let i = 0; i < dataTest.length; i++){
-        if(dataTest[i].category == selectedCategory || selectedCategory == "Tous")
-          articles.push(dataTest[i]);
+    if(selectedCategory == "Tous"){
+      fetch('http://localhost:9000/api/private/article')
+      .then(res => res.json())
+      .then(data => {
+        setAllArticles(data.reverse());
+      })
+      .catch(e => console.log(e.toString()));
     }
-    return articles;
+    else{
+      fetch(`http://localhost:9000/api/private/article/category/${selectedCategory}`)
+      .then(res => res.json())
+      .then(data => {
+        setAllArticles(data.reverse());
+      })
+      .catch(e => console.log(e.toString()));
+    }
+    
+  }, [selectedCategory, posting, toDelete, update]);
+
+  //get list of categories
+  useEffect(() =>{
+    fetch('http://localhost:9000/api/private/category')
+      .then(res => res.json())
+      .then(data => {
+        data.unshift({id: 0, name: 'Tous'});
+        setAllCategories(data);
+      })
+      .catch(e => console.log(e.toString()));
+  }, [selectedCategory, allCategories]);
+
+  // triggers submit and send POST request to add article
+  function submitArticle(article) {
+    setPosting(true);
+    setAddArticle(article);
   }
+
+  // Add article
+  useEffect(() =>{
+    if(posting){
+      fetch('http://localhost:9000/api/private/article', {
+        method: "POST",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(addArticle)
+    })
+    .then(res => res.json())
+    .then(data => {
+      setPosting(false);
+    })
+    .catch(e => console.log(e.toString()));
+    }
+    
+  }, [addArticle]);
+
+  // triggers submit and send POST request to add category
+  function submitCategory(category) {
+    setPosting(true);
+    setAddCategory(category);
+  }
+
+  // Add category
+  useEffect(() =>{
+    if(posting){
+      fetch('http://localhost:9000/api/private/category', {
+        method: "POST",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(addCategory)
+    })
+    .then(res => res.json())
+    .then(data => {
+      setPosting(false);
+    })
+    .catch(e => console.log(e.toString()));
+    }
+    
+  }, [addCategory]);
+
+  // triggers deletion and send DELETE request
+  function deleteArticle(event, id) {
+    event.stopPropagation();
+
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        setToDelete({deleting: true, articleId: id});
+
+        Swal.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        )
+      };
+    });
+  }
+
+  useEffect(() => {
+    if (toDelete.deleting) {
+      fetch(`http://localhost:9000/api/private/article/${toDelete.articleId}`, {
+        method: "DELETE"
+      })
+      .then(() => {
+        setToDelete({deleting: false, productId: -1});
+      })
+      .catch(e => console.log(e.toString()));
+    }
+  }, [toDelete])
+
+  // triggers submit and send PUT request to update article
+  function modifyArticle(article) {
+    setUpdate(true);
+    setUpdateArticle(article);
+  }
+
+  // Update article
+  useEffect(() =>{
+    if(update){
+      fetch('http://localhost:9000/api/private/article', {
+        method: "PUT",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updateArticle)
+    })
+    .then(res => res.json())
+    .then(data => {
+      setUpdate(false);
+    })
+    .catch(e => console.log(e.toString()));
+    }
+    
+  }, [updateArticle]);
   
   
   return (
@@ -113,17 +246,19 @@ function App() {
       <Header />
       <AddArticle
             categories={allCategories}
-            addArticle={addArticle}
+            submitArticle={submitArticle}
             addArticleDisplay={addArticleDisplay}
             displayAddArticle={displayAddArticle}
       />
       <AddCategory
             addCategoryDisplay={addCategoryDisplay}
+            submitCategory={submitCategory}
             displayAddCategory={displayAddCategory}
       />
       <UpdateArticle
           data={selectedArticle}
           categories={allCategories}
+          modifyArticle={modifyArticle}
           updateArticleDisplay={updateArticleDisplay}
           displayUpdateArticle={displayUpdateArticle}
       />
@@ -144,6 +279,7 @@ function App() {
         <Articles 
             data={allArticles}
             seeArticle={seeArticle}
+            deleteArticle={deleteArticle}
             displayUpdateArticle={displayUpdateArticle}
         />
       </main>

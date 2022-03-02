@@ -7,6 +7,20 @@ export default function UpdateArticle(props) {
         }
 	}, this);
 
+    function updateArticle() {
+        let article = {
+            id: props.data.id,
+            title: document.getElementById("title").value,
+            author: document.getElementById("author").value,
+            creationDate: props.data.creationDate,
+            creationHour: props.data.creationHour,
+            content: document.getElementById("content").value,
+            category: document.getElementById("category_selector").value,
+        }
+        props.modifyArticle(article);
+        props.displayUpdateArticle();
+    }
+
     if(props.updateArticleDisplay){
         return (
             <div className="addArticle">
@@ -16,7 +30,8 @@ export default function UpdateArticle(props) {
                         <div className="addArticle_input_container">
                             <label>TITRE : {" "} </label>
                             <input
-                                className="addArticle__input" 
+                                className="addArticle__input"
+                                id="title"
                                 type="text"
                                 defaultValue={props.data.title} 
                                 name="title"
@@ -33,9 +48,10 @@ export default function UpdateArticle(props) {
                         
                         
                         <div className="addArticle_input_container">
-                            <label>TITRE : {" "} </label>
+                            <label>AUTEUR : {" "} </label>
                                 <input
-                                    className="addArticle__input" 
+                                    className="addArticle__input"
+                                    id="author" 
                                     type="text"
                                     defaultValue={props.data.author} 
                                     name="author"
@@ -45,12 +61,13 @@ export default function UpdateArticle(props) {
                         <label>CONTENU : {" "} </label>
                         <textarea
                             className="addArticle_content"
+                            id="content"
                             defaultValue={props.data.content} 
                             name="content"
                         />
     
                         <div className="addArticle_buttons">
-                            <button className="addArticle_add">Modifier l'article</button>
+                            <button className="addArticle_add" onClick={event => updateArticle()}>Modifier l'article</button>
                             <button className="addArticle_back" onClick={event => props.displayUpdateArticle()}>Retour</button>
                         </div>
                     </div> 

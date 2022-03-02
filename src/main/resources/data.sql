@@ -11,6 +11,6 @@ CREATE TABLE articles (
 );
 
 INSERT INTO articles (title, category, author, creationdate, creationhour, content) VALUES
-  ('Un premier article', 'Sport', 'Maxence FORTIN', '01/03/2022', '14:02', 'Loremmmmm'),
-  ('Un second!', 'Géopolitique', 'Paul BODIN', '28/01/2022', '09:15', 'Ipssuuuuuuu'),
-  ('La france championne du monde', 'Sport', 'Paul BODIN', '17/06/2022', '13:15', 'THDJSJDJS');
+  ('Un premier article', 'Divers', 'Maxence FORTIN', '01/03/2022', '14:02', 'Bonjour à tous ! Ceci est le premier article de ce blog réalisé par Paul BODIN et Maxence FORTIN !
+  Bonne découverte !'),
+  ('Un second !', 'Géopolitique', 'Paul BODIN', '28/01/2022', '09:15', 'Bonjour à tous, Aujourd hui je souhaite introduire une nouvelle catégorie sur ce blog : la géopolitique !');

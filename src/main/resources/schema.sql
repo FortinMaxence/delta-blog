@@ -21,5 +21,5 @@ CREATE TABLE category_article (
 
 
 INSERT INTO categories (name) VALUES
-  ('Sport'),
+  ('Divers'),
   ('Géopolitique');

@@ -1,4 +1,13 @@
-export default function AddCategory(props) {    
+export default function AddCategory(props) { 
+    function submitCategory() {
+        let category = {
+            id:0,
+            name: document.getElementById("name").value
+        }
+        props.submitCategory(category);
+        props.displayAddCategory();
+    }
+
     if(props.addCategoryDisplay){
         return (
             <div className="addCategory">
@@ -9,14 +18,16 @@ export default function AddCategory(props) {
                             <label>NOM DE LA CATÉGORIE : {" "} </label>
                             <input
                                 className="addCategory__input" 
+                                id="name"
                                 type="text"
                                 placeholder="Nom de la catégorie..." 
-                                name="title"
+                                name="name"
                             />
                         </div>
     
                         <div className="addCategory_buttons">
-                            <button className="addCategory_add">Ajouter la catégorie</button>
+                            <button className="addCategory_add" onClick={event => submitCategory()}>
+                                Ajouter la catégorie</button>
                             <button className="addCategory_back" onClick={event => props.displayAddCategory()}>Retour</button>
                         </div>
                     </div> 
