@@ -1,5 +1,7 @@
-.App {
-  text-align: center;
+body {
+  background-color: #0A0A0D;
+  margin: 0;
+  padding: 0;
 }
 
 .App-logo {
@@ -14,13 +16,13 @@
 }
 
 .App-header {
-  background: linear-gradient(144deg, rgb(0,255,128) 25%, rgb(0,255,255) 100%); 
+  background-color: #EC3F3F; 
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: #000;
+  color: #0A0A0D;
 }
 
 .App-title {
